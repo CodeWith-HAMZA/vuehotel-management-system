@@ -17,10 +17,10 @@
         <h3 class="text-xl font-semibold text-gray-900 mb-2">Booking Not Found</h3>
         <p class="text-gray-600 mb-6">{{ error }}</p>
         <NuxtLink 
-          to="/bookings"
+          to="/owner/bookings"
           class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
         >
-          Back to My Bookings
+          Back to Bookings
         </NuxtLink>
       </div>
     </div>
@@ -39,7 +39,7 @@
                 <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                 </svg>
-                <NuxtLink to="/bookings" class="text-gray-700 hover:text-blue-600">My Bookings</NuxtLink>
+                <NuxtLink to="/owner/bookings" class="text-gray-700 hover:text-blue-600">My Bookings</NuxtLink>
               </div>
             </li>
             <li aria-current="page">
@@ -92,33 +92,33 @@
                   <div class="flex justify-between">
                     <span class="text-gray-600">Check-in:</span>
                     <span class="font-medium">{{ formatDate(booking.checkIn) }}</span>
-              </div>
+                  </div>
                   <div class="flex justify-between">
                     <span class="text-gray-600">Check-out:</span>
                     <span class="font-medium">{{ formatDate(booking.checkOut) }}</span>
-              </div>
+                  </div>
                   <div class="flex justify-between">
                     <span class="text-gray-600">Total nights:</span>
                     <span class="font-medium">{{ calculateNights(booking.checkIn, booking.checkOut) }}</span>
-            </div>
+                  </div>
                   <div class="flex justify-between">
                     <span class="text-gray-600">Guests:</span>
                     <span class="font-medium">{{ booking.guests }} guest(s)</span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-
-                    <div>
+              
+              <div>
                 <h4 class="font-medium text-gray-900 mb-3">Booking Information</h4>
                 <div class="space-y-3">
                   <div class="flex justify-between">
                     <span class="text-gray-600">Booking ID:</span>
                     <span class="font-mono text-sm">{{ booking.id }}</span>
-                      </div>
+                  </div>
                   <div class="flex justify-between">
                     <span class="text-gray-600">Booked on:</span>
                     <span class="font-medium">{{ formatDate(booking.created_at) }}</span>
-                    </div>
+                  </div>
                   <div class="flex justify-between">
                     <span class="text-gray-600">Status:</span>
                     <span :class="getStatusClass(booking.status)" class="px-2 py-1 text-xs font-medium rounded-full">
@@ -135,75 +135,42 @@
           </div>
 
           <!-- Guest Information -->
-          <div class="bg-white rounded-2xl shadow-lg p-6">
-            <h3 class="text-lg font-semibold mb-4">Guest Information</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                <input 
-                  type="text" 
-                  :value="userProfile?.first_name || ''" 
-                  disabled
-                  class="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 text-gray-700"
-                >
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                <input 
-                  type="text" 
-                  :value="userProfile?.last_name || ''" 
-                  disabled
-                  class="w-full px-3 py-3 border border-gray-200 rounded-lg bg-gray-50 text-gray-700"
-                >
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                <input 
-                  type="email" 
-                  :value="userProfile?.email || ''" 
-                  disabled
-                  class="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 text-gray-700"
-                >
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
-                <input 
-                  type="tel" 
-                  :value="userProfile?.phone || 'Not provided'" 
-                  disabled
-                  class="w-full px-3 py-2 border border-gray-200 rounded-lg bg-gray-50 text-gray-700"
-                >
-              </div>
-            </div>
-          </div>
-
+           
           <!-- Notes and Messages -->
           <div v-if="booking.guest_notes || booking.owner_notes" class="bg-white rounded-2xl shadow-lg p-6">
             <h3 class="text-lg font-semibold mb-4">Notes & Messages</h3>
             <div class="space-y-4">
               <div v-if="booking.guest_notes">
-                <h4 class="font-medium text-gray-900 mb-2">Your Notes</h4>
+                <h4 class="font-medium text-gray-900 mb-2">Guest Notes</h4>
                 <p class="text-gray-700 bg-gray-50 p-3 rounded-lg">{{ booking.guest_notes }}</p>
               </div>
               <div v-if="booking.owner_notes">
-                <h4 class="font-medium text-gray-900 mb-2">Host Message</h4>
+                <h4 class="font-medium text-gray-900 mb-2">Your Notes</h4>
                 <p class="text-gray-700 bg-blue-50 p-3 rounded-lg border border-blue-200">{{ booking.owner_notes }}</p>
               </div>
             </div>
           </div>
 
-          <!-- Property Amenities -->
-          <div v-if="booking.property.amenities && booking.property.amenities.length > 0" class="bg-white rounded-2xl shadow-lg p-6">
-            <h3 class="text-lg font-semibold mb-4">Property Amenities</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div 
-                v-for="amenity in booking.property.amenities" 
-                :key="amenity"
-                class="flex items-center space-x-3"
-              >
-                <span class="text-2xl">{{ getAmenityIcon(amenity) }}</span>
-                <span class="text-gray-700">{{ formatAmenity(amenity) }}</span>
+          <!-- Add Owner Notes -->
+          <div class="bg-white rounded-2xl shadow-lg p-6">
+            <h3 class="text-lg font-semibold mb-4">Add Notes</h3>
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Notes for Guest</label>
+                <textarea 
+                  v-model="newOwnerNotes"
+                  class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  rows="3"
+                  placeholder="Add any notes or messages for the guest..."
+                ></textarea>
               </div>
+              <button 
+                @click="saveOwnerNotes"
+                :disabled="!newOwnerNotes.trim()"
+                class="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+              >
+                Save Notes
+              </button>
             </div>
           </div>
         </div>
@@ -244,44 +211,70 @@
               <div class="space-y-3">
                 <button 
                   v-if="booking.status === 'pending'"
-                  @click="cancelBooking"
-                  class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-medium transition-colors"
+                  @click="approveBooking"
+                  class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-medium transition-colors"
                 >
-                  Cancel Booking
+                  Approve Booking
                 </button>
                 
                 <button 
-                  v-if="booking.status === 'confirmed' && isUpcoming(booking.checkIn)"
-                  @click="modifyBooking"
+                  v-if="booking.status === 'pending'"
+                  @click="rejectBooking"
+                  class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-medium transition-colors"
+                >
+                  Reject Booking
+                </button>
+                
+                <button 
+                  v-if="booking.status === 'confirmed'"
+                  @click="markCompleted"
                   class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition-colors"
                 >
-                  Modify Booking
-              </button>
-
+                  Mark as Completed
+                </button>
+                
                 <button 
-                  v-if="booking.status === 'confirmed' && isUpcoming(booking.checkIn)"
-                  @click="contactHost"
-                  class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-medium transition-colors"
+                  v-if="booking.status === 'confirmed'"
+                  @click="contactGuest"
+                  class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-medium transition-colors"
                 >
-                  Contact Host
+                  {{ guestInfo?.email ? `Contact Guest (${guestInfo.email})` : 'Contact Guest' }}
                 </button>
               </div>
-              </div>
+            </div>
 
-              <!-- Cancellation Policy -->
+            <!-- Quick Actions -->
             <div class="bg-white rounded-2xl shadow-lg p-6">
-                <h4 class="font-medium text-gray-900 mb-2">Cancellation Policy</h4>
-                <p class="text-sm text-gray-600">
-                  Free cancellation up to 24 hours before check-in. 
-                  No refunds for cancellations made within 24 hours of arrival.
-                </p>
+              <h4 class="font-medium text-gray-900 mb-4">Quick Actions</h4>
+              <div class="space-y-3">
+                <NuxtLink 
+                  :to="`/owner/property/${booking.property_id}`"
+                  class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-lg font-medium transition-colors text-center"
+                >
+                  Manage Property
+                </NuxtLink>
+                
+                <NuxtLink 
+                  to="/owner/bookings"
+                  class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-lg font-medium transition-colors text-center"
+                >
+                  View All Bookings
+                </NuxtLink>
+                
+                <!-- <button 
+                  @click="downloadInvoice"
+                  class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-lg font-medium transition-colors"
+                >
+                  Download Invoice
+                </button> -->
               </div>
+            </div>
 
             <!-- Help & Support -->
             <div class="bg-white rounded-2xl shadow-lg p-6">
               <h4 class="font-medium text-gray-900 mb-2">Need Help?</h4>
               <p class="text-sm text-gray-600 mb-3">
-                Questions about your booking? We're here to help!
+                Questions about this booking? We're here to help!
               </p>
               <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded-lg font-medium transition-colors">
                 Contact Support
@@ -300,9 +293,10 @@ const client = useSupabaseClient()
 
 // State
 const booking = ref(null)
-const userProfile = ref(null)
+const guestInfo = ref(null)
 const loading = ref(true)
 const error = ref(null)
+const newOwnerNotes = ref('')
 
 // Computed
 const calculateNights = (checkIn, checkOut) => {
@@ -324,11 +318,6 @@ const calculateServiceFee = () => {
 
 const calculateTaxes = () => {
   return Math.round(calculateSubtotal() * 0.08) // 8% tax
-}
-
-const isUpcoming = (checkIn) => {
-  if (!checkIn) return false
-  return new Date(checkIn) > new Date()
 }
 
 // Methods
@@ -372,38 +361,31 @@ const getStatusClass = (status) => {
   }
 }
 
-const formatAmenity = (amenity) => {
-  const amenityMap = {
-    'swimming_pool': 'Swimming Pool',
-    'free_parking': 'Free Parking',
-    'free_wifi': 'Free WiFi',
-    'kitchen': 'Kitchen',
-    'gym': 'Gym',
-    'service_24_7': '24/7 Service',
-    'beach_access': 'Beach Access',
-    'spa': 'Spa',
-    'pet_friendly': 'Pet Friendly'
+const approveBooking = async () => {
+  if (!confirm('Are you sure you want to approve this booking?')) return
+  
+  try {
+    const { error } = await client
+      .from('bookings')
+      .update({ status: 'confirmed' })
+      .eq('id', route.params.id)
+    
+    if (error) throw error
+    
+    // Refresh booking data
+    await fetchBooking()
+    
+    // Show success message
+    alert('Booking approved successfully!')
+    
+  } catch (error) {
+    console.error('Error approving booking:', error)
+    alert('Failed to approve booking. Please try again.')
   }
-  return amenityMap[amenity] || amenity
 }
 
-const getAmenityIcon = (amenity) => {
-  const iconMap = {
-    'swimming_pool': '🏊‍♂️',
-    'free_parking': '🚗',
-    'free_wifi': '📶',
-    'kitchen': '🍳',
-    'gym': '🏋️‍♂️',
-    'service_24_7': '🕐',
-    'beach_access': '🏖️',
-    'spa': '🧖‍♀️',
-    'pet_friendly': '🐾'
-  }
-  return iconMap[amenity] || '✨'
-}
-
-const cancelBooking = async () => {
-  if (!confirm('Are you sure you want to cancel this booking? This action cannot be undone.')) return
+const rejectBooking = async () => {
+  if (!confirm('Are you sure you want to reject this booking?')) return
   
   try {
     const { error } = await client
@@ -417,22 +399,81 @@ const cancelBooking = async () => {
     await fetchBooking()
     
     // Show success message
-    alert('Booking cancelled successfully!')
+    alert('Booking rejected successfully!')
     
   } catch (error) {
-    console.error('Error cancelling booking:', error)
-    alert('Failed to cancel booking. Please try again.')
+    console.error('Error rejecting booking:', error)
+    alert('Failed to reject booking. Please try again.')
   }
 }
 
-const modifyBooking = () => {
-  // Navigate to booking modification page
-  navigateTo(`/booking/${route.params.id}/modify`)
+const markCompleted = async () => {
+  if (!confirm('Mark this booking as completed?')) return
+  
+  try {
+    const { error } = await client
+      .from('bookings')
+      .update({ status: 'completed' })
+      .eq('id', route.params.id)
+    
+    if (error) throw error
+    
+    // Refresh booking data
+    await fetchBooking()
+    
+    // Show success message
+    alert('Booking marked as completed!')
+    
+  } catch (error) {
+    console.error('Error updating booking:', error)
+    alert('Failed to update booking. Please try again.')
+  }
 }
 
-const contactHost = () => {
-  // Implement host contact functionality
-  alert('Contact host functionality coming soon!')
+const saveOwnerNotes = async () => {
+  if (!newOwnerNotes.value.trim()) return
+  
+  try {
+    const { error } = await client
+      .from('bookings')
+      .update({ owner_notes: newOwnerNotes.value })
+      .eq('id', route.params.id)
+    
+    if (error) throw error
+    
+    // Refresh booking data
+    await fetchBooking()
+    
+    // Clear input
+    newOwnerNotes.value = ''
+    
+    // Show success message
+    alert('Notes saved successfully!')
+    
+  } catch (error) {
+    console.error('Error saving notes:', error)
+    alert('Failed to save notes. Please try again.')
+  }
+}
+
+const contactGuest = () => {
+  if (guestInfo.value?.email) {
+    // Show guest contact information
+    const message = `Guest Contact Information:\n\n` +
+                   `Name: ${guestInfo.value.first_name || ''} ${guestInfo.value.last_name || ''}\n` +
+                   `Email: ${guestInfo.value.email}\n` +
+                   `Phone: ${guestInfo.value.phone || 'Not provided'}\n\n` +
+                   `You can contact the guest directly using the information above.`
+    
+    alert(message)
+  } else {
+    alert('Guest contact information is not available for this booking.')
+  }
+}
+
+const downloadInvoice = () => {
+  // Implement invoice download functionality
+  alert('Invoice download functionality coming soon!')
 }
 
 // Fetch booking data
@@ -461,12 +502,10 @@ const fetchBooking = async () => {
           city,
           state,
           country,
-          price_per_night,
-          amenities
+          price_per_night
         )
       `)
       .eq('id', route.params.id)
-      .eq('guest_id', authUser.id)
       .single()
     
     if (bookingError) throw bookingError
@@ -476,38 +515,68 @@ const fetchBooking = async () => {
       return
     }
     
+    // Verify this booking belongs to one of the user's properties
+    const { data: userProperties, error: propertiesError } = await client
+      .from('properties')
+      .select('id')
+      .eq('owner_id', authUser.id)
+    
+    if (propertiesError) throw propertiesError
+    
+    const isOwner = userProperties.some(prop => prop.id === data.property_id)
+    if (!isOwner) {
+      error.value = 'You do not have permission to view this booking'
+      return
+    }
+    
     // Process booking data
     booking.value = {
       id: data.id,
+      property_id: data.property_id,
       propertyName: data.property.title,
       propertyImage: data.property.images?.[0] || '/placeholder-property.jpg',
       property: data.property,
       checkIn: data.check_in_date,
       checkOut: data.check_out_date,
-      guests: 1, // You can add guest count to bookings table if needed
+      guests: data.number_of_guests || 1,
       total: data.total_amount,
       status: data.status,
       guest_notes: data.guest_notes,
       owner_notes: data.owner_notes,
       created_at: data.created_at,
-      updated_at: data.updated_at
+      updated_at: data.updated_at,
+      guest_id: data.guest_id // Add guest_id to the booking object
     }
     
-    // Fetch user profile
-    const { data: profile, error: profileError } = await client
-      .from('users')
-      .select('first_name, last_name, email, phone')
-      .eq('id', authUser.id)
-      .single()
-    
-    if (!profileError) {
-      userProfile.value = profile
+    // Fetch guest information
+    if (data.guest_id) {
+      console.log('Fetching guest info for ID:', data.guest_id)
+      
+      const { data: guest, error: guestError } = await client
+        .from('users')
+        .select('first_name, last_name, email, phone')
+        .eq('id', data.guest_id).maybeSingle()         
+      
+      if (guestError) {
+        console.error('Error fetching guest data:', guestError)
+        guestInfo.value = null
+      } else {
+
+      console.log('Guest info fetched successfully:', guest)
+        guestInfo.value = guest
+        console.log('Guest info fetched successfully:', guest)
+      }
+    } else {
+      console.warn('No guest_id found in booking data:', data)
+      guestInfo.value = null
     }
     
-    console.log('Booking fetched:', booking.value)
+    console.log('Owner booking details fetched:', booking.value)
+    console.log('Guest info state:', guestInfo.value)
+    console.log('Full booking data from database:', data)
     
   } catch (err) {
-    console.error('Error fetching booking:', err)
+    console.error('Error fetching owner booking:', err)
     error.value = err.message || 'Failed to fetch booking details'
   } finally {
     loading.value = false
@@ -530,7 +599,7 @@ watch(() => route.params.id, (newId) => {
 </script>
 
 <style scoped>
-/* Custom styles for the booking details page */
+/* Custom styles for the owner booking details page */
 .sticky {
   position: sticky;
   top: 2rem;

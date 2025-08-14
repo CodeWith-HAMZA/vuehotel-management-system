@@ -281,12 +281,12 @@ const handleSignup = async () => {
       }
     }
     
-    success.value = 'Account created successfully! Please check your email to verify your account.'
+    success.value = 'Account created successfully! Redirecting to dashboard...'
     
-    // Redirect to dashboard after a short delay
+    // Redirect to dashboard immediately after successful signup
     setTimeout(() => {
       router.push('/dashboard')
-    }, 2000)
+    }, 1500)
     
   } catch (err) {
     error.value = err.message || 'Failed to create account'
