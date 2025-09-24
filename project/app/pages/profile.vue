@@ -225,7 +225,8 @@ onMounted(async () => {
     await fetchUserProfile(user.value.id)
   } else {
     // Redirect to login if not authenticated
-    await router.push('/login')
+    // await router.push('/login')
+    return
   }
 })
 
@@ -235,7 +236,8 @@ watch(user, async (newUser) => {
     await fetchUserProfile(newUser.id)
   } else {
     // Redirect to login if user is not authenticated
-    await router.push('/login')
+    //  await router.push('/login')
+    return
   }
 })
 </script>

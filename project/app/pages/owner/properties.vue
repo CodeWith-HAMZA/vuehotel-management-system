@@ -157,7 +157,7 @@
 
             <!-- Actions -->
             <div class="flex space-x-2">
-              <NuxtLink 
+              <!-- <NuxtLink 
                 :to="`/owner/property/${property.id}`"
                 class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-medium text-center transition-colors"
               >
@@ -168,7 +168,7 @@
                 class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-lg text-sm font-medium transition-colors"
               >
                 Edit
-              </button>
+              </button> -->
             </div>
           </div>
         </div>

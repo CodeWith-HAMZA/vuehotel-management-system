@@ -9,7 +9,7 @@
       </div>
 
       <!-- Progress Bar -->
-      <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+      <!-- <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
         <div class="flex items-center justify-between mb-4">
           <span class="text-sm font-medium text-gray-700">Step 1 of 4</span>
           <span class="text-sm text-gray-500">25% Complete</span>
@@ -17,7 +17,7 @@
         <div class="w-full bg-gray-200 rounded-full h-2">
           <div class="bg-blue-600 h-2 rounded-full" style="width: 25%"></div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Property Listing Form -->
       <div class="bg-white rounded-2xl shadow-lg p-8">
@@ -933,7 +933,8 @@ const handleSubmit = async () => {
 // Lifecycle
 onMounted(() => {
   if (!user.value) {
-    router.push('/login')
+    // router.push('/login')
+    return
   }
 })
 </script>

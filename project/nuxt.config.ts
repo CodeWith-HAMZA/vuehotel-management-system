@@ -7,7 +7,12 @@ export default defineNuxtConfig({
   supabase: {
     url: 'https://cxmznzutnsidqmcgcuuc.supabase.co',
     key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4bXpuenV0bnNpZHFtY2djdXVjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NDgxMTI4NCwiZXhwIjoyMDcwMzg3Mjg0fQ.AiKYQn3cc6BXZJpDL4w_YlRq-5bJZospl7Ez4Hcw6UY',
-    redirect: false
+    redirect: false,
+    redirectOptions: {
+      login: '/login',
+      callback: '/',
+      exclude: ['/', '/login', '/signup', '/properties', '/property/*', '/about', '/contact']
+    }
   },
 
   app: {

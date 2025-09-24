@@ -569,7 +569,9 @@ const calculateTotal = () => {
   return calculateSubtotal() + calculateServiceFee() + calculateTaxes()
 }
 
+
 const handleBooking = async () => {
+
   if (!canBook.value) return
   
   bookingLoading.value = true
@@ -625,8 +627,19 @@ const handleBooking = async () => {
       guests: 1
     }
     
+    
     console.log('Booking created:', newBooking)
     
+    const width = 500
+  const height = 700
+  const left = (window.innerWidth - width) / 2
+  const top = (window.innerHeight - height) / 2
+
+  window.open(
+    'https://buy.stripe.com/test_28E8wR5671Ng4sieWK2Ry00', // 👈 your Stripe checkout link
+    'StripeCheckout',
+    `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes,status=yes`
+  )
   } catch (error) {
     console.error('Error creating booking:', error)
     alert(`Failed to create booking: ${error.message}`)
