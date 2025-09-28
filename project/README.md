@@ -1,6 +1,6 @@
-# 🏨 HotelHub - Hotel Management System
+# 🏨 Explore & Go
 
-A beautiful and modern hotel management system built with Nuxt.js, featuring an attractive UI for both property owners and clients.
+A beautiful and modern Explore & Go built with Nuxt.js, featuring an attractive UI for both property owners and clients.
 
 ## ✨ Features
 
@@ -180,4 +180,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-**HotelHub** - Making travel accommodation beautiful and accessible! 🏨✨
+**Explore & Go** - Making travel accommodation beautiful and accessible! 🏨✨

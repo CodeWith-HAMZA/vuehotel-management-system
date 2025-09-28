@@ -492,7 +492,7 @@ const generateNotifications = (bookings, properties) => {
     notifications.push({
       id: 'welcome-owner',
       type: 'success',
-      message: 'Welcome to HotelHub! Start listing your properties to earn money.',
+      message: 'Welcome to Explore & Go! Start listing your properties to earn money.',
       time: 'Just now'
     })
   }

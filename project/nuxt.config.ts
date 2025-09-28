@@ -17,11 +17,11 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'HotelHub - Your Perfect Stay Awaits',
+      title: 'Explore & Go - Your Perfect Stay Awaits',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Discover and book amazing accommodations worldwide. From luxury resorts to cozy homes, find your perfect stay with HotelHub.' },
+        { name: 'description', content: 'Discover and book amazing accommodations worldwide. From luxury resorts to cozy homes, find your perfect stay with Explore & Go.' },
         { name: 'keywords', content: 'hotel, booking, accommodation, travel, vacation, resort, hostel, apartment' }
       ],
       link: [

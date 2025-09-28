@@ -10,7 +10,7 @@
               <div class="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
                 <span class="text-white font-bold text-lg">H</span>
               </div>
-              <span class="text-xl font-bold text-gray-900">HotelHub</span>
+              <span class="text-xl font-bold text-gray-900">Explore & Go</span>
             </NuxtLink>
           </div>
 
@@ -144,11 +144,11 @@
               <div class="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
                 <span class="text-white font-bold text-lg">H</span>
               </div>
-              <span class="text-xl font-bold">HotelHub</span>
+              <span class="text-xl font-bold">Explore & Go</span>
             </div>
             <p class="text-gray-300 mb-4">
               Discover and book amazing accommodations worldwide. From luxury resorts to cozy homes, 
-              find your perfect stay with HotelHub.
+              find your perfect stay with Explore & Go.
             </p>
             <div class="flex space-x-4">
               <a href="#" class="text-gray-400 hover:text-white transition-colors">
@@ -197,7 +197,7 @@
 
         <div class="border-t border-gray-800 mt-8 pt-8 text-center">
           <p class="text-gray-400">
-            © 2024 HotelHub. All rights reserved. Made with ❤️ for travelers worldwide.
+            © 2024 Explore & Go. All rights reserved. Made with ❤️ for travelers worldwide.
           </p>
         </div>
       </div>

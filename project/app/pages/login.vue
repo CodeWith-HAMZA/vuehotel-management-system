@@ -6,7 +6,7 @@
       <div class="text-center">
         <h2 class="text-3xl font-bold text-gray-900">Welcome back</h2>
         <p class="mt-2 text-sm text-gray-600">
-          Sign in to your HotelHub account
+          Sign in to your Explore & Go account
         </p>
       </div>
 

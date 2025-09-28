@@ -324,7 +324,7 @@ const generateNotifications = (bookings) => {
     notifications.push({
       id: 'welcome',
       type: 'success',
-      message: 'Welcome to HotelHub! Start exploring properties and make your first booking.',
+      message: 'Welcome to Explore & Go! Start exploring properties and make your first booking.',
       time: 'Just now'
     })
   }

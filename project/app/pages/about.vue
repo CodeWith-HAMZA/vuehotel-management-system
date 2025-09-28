@@ -2,7 +2,7 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <!-- Hero Section -->
     <div class="text-center mb-16">
-      <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">About HotelHub</h1>
+      <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">About Explore & Go</h1>
       <p class="text-xl text-gray-600 max-w-3xl mx-auto">
         We're revolutionizing the way people find and book accommodations, connecting travelers with unique properties worldwide.
       </p>
@@ -13,7 +13,7 @@
       <div>
         <h2 class="text-3xl font-bold text-gray-900 mb-6">Our Mission</h2>
         <p class="text-lg text-gray-600 mb-6">
-          At HotelHub, we believe everyone deserves to find their perfect stay. Whether you're a traveler seeking adventure or a property owner looking to share your space, we're here to make the process seamless and enjoyable.
+          At Explore & Go, we believe everyone deserves to find their perfect stay. Whether you're a traveler seeking adventure or a property owner looking to share your space, we're here to make the process seamless and enjoyable.
         </p>
         <p class="text-lg text-gray-600">
           Our platform combines cutting-edge technology with human-centered design to create an experience that's both powerful and intuitive.
@@ -50,7 +50,7 @@
     <div class="text-center mb-16">
       <h2 class="text-3xl font-bold text-gray-900 mb-6">Our Team</h2>
       <p class="text-lg text-gray-600 mb-12">
-        Meet the passionate individuals behind HotelHub who are dedicated to making travel accessible and enjoyable for everyone.
+        Meet the passionate individuals behind Explore & Go who are dedicated to making travel accessible and enjoyable for everyone.
       </p>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">

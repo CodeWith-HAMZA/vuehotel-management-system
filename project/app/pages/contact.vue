@@ -20,8 +20,8 @@
             </div>
             <div>
               <h3 class="font-semibold text-gray-900">Email</h3>
-              <p class="text-gray-600">support@hotelhub.com</p>
-              <p class="text-gray-600">business@hotelhub.com</p>
+              <p class="text-gray-600">support@Exploreandgo.com</p>
+              <p class="text-gray-600">business@Exploreandgo.com</p>
             </div>
           </div>
           

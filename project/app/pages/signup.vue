@@ -5,7 +5,7 @@
       <div class="text-center">
         <h2 class="text-3xl font-bold text-gray-900">Create your account</h2>
         <p class="mt-2 text-sm text-gray-600">
-          Join HotelHub and start your journey
+          Join Explore & Go and start your journey
         </p>
       </div>
 
