@@ -12,25 +12,10 @@
           </p>
           
           <!-- Search Bar -->
-          <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl p-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div class="relative">
-                <input type="text" placeholder="Where are you going?" 
-                       class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700">
-              </div>
-              <div class="relative">
-                <input type="date" 
-                       class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700">
-              </div>
-              <div class="relative">
-                <input type="date" 
-                       class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700">
-              </div>
-              <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
-                Search
-              </button>
-            </div>
-          </div>
+           <button @click="goToProperties" class="text-black bg-white hover:opacity-70 opacity-90 py-4 px-16 rounded-lg">
+            Explore Properties
+           </button>
+           
         </div>
       </div>
     </div>
@@ -159,5 +144,10 @@
 </template>
 
 <script setup>
+const router = useRouter()
+function goToProperties(){
+  router.push('/properties')
+
+}
 // Home page component
 </script> 

@@ -132,7 +132,7 @@
         </div>
         
         <!-- Amenities & Rules Filters -->
-        <div class="mt-4">
+        <!-- <div class="mt-4">
           <h4 class="text-sm font-medium text-gray-700 mb-3">Amenities & Rules:</h4>
           <div class="flex flex-wrap gap-2">
             <button 
@@ -151,7 +151,7 @@
               {{ amenity.icon }} {{ amenity.label }}
             </button>
           </div>
-        </div>
+        </div> -->
         
         <!-- Clear Filters Button -->
         <div class="mt-4 flex justify-between items-center">
@@ -561,9 +561,9 @@ const quickFilters = [
   { key: 'houses', label: 'Houses', icon: '🏠' },
   { key: 'luxury', label: 'Luxury', icon: '👑' },
   { key: 'budget', label: 'Budget', icon: '💰' },
-  { key: 'pet-friendly', label: 'Pet Friendly', icon: '🐕' },
-  { key: 'no-smoking', label: 'No Smoking', icon: '🚭' },
-  { key: 'popular', label: 'Popular', icon: '⭐' }
+  // { key: 'pet-friendly', label: 'Pet Friendly', icon: '🐕' },
+  // { key: 'no-smoking', label: 'No Smoking', icon: '🚭' },
+  // { key: 'popular', label: 'Popular', icon: '⭐' }
 ]
 
 const isQuickFilterActive = (filterKey) => {

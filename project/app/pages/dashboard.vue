@@ -12,7 +12,7 @@
             <NuxtLink to="/properties" class="btn-outline">
               Browse Properties
             </NuxtLink>
-            <button class="btn-outline">View Profile</button>
+            <!-- <button class="btn-outline">View Profile</button> -->
           </div>
         </div>
       </div>

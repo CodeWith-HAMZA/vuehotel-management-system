@@ -15,6 +15,7 @@ const handleStripeCheckout = async () => {
   // ⚡ Using Stripe.js with a Price ID (set up in Stripe Dashboard)
   const { error } = await stripe.redirectToCheckout({
     lineItems: [
+            
       { price: 'price_1QWxyzABC123', quantity: 1 } // 👈 Replace with your Price ID
     ],
     mode: 'payment',

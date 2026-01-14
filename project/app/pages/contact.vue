@@ -189,6 +189,11 @@
 </template>
 
 <script setup>
+import { Resend } from 'resend';
+
+const client = useSupabaseClient()
+const user = useSupabaseUser()
+const router = useRouter()
 const form = ref({
   firstName: '',
   lastName: '',
@@ -203,16 +208,21 @@ const submitForm = async () => {
   isSubmitting.value = true
   
   // Simulate form submission
-  await new Promise(resolve => setTimeout(resolve, 2000))
+  // await new Promise(resolve => setTimeout(resolve, 2000))
+
+  const res = await $fetch('/api/sendEmail', {
+      method: 'POST',
+      body: form.value
+    });
   
   // Reset form
-  form.value = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    subject: '',
-    message: ''
-  }
+  // form.value = {
+  //   firstName: '',
+  //   lastName: '',
+  //   email: '',
+  //   subject: '',
+  //   message: ''
+  // }
   
   isSubmitting.value = false
   
