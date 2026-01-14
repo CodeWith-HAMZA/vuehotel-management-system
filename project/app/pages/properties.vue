@@ -12,7 +12,7 @@
           </p>
           
           <!-- Search Bar -->
-          <div class="max-w-4xl mx-auto">
+          <!-- <div class="max-w-4xl mx-auto">
             <div class="bg-white rounded-2xl p-2 shadow-2xl">
               <div class="grid grid-cols-1 md:grid-cols-4 gap-2">
                 <input 
@@ -40,7 +40,7 @@
                 </button>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -57,8 +57,8 @@
             :class="[
               'px-4 py-2 rounded-full text-sm font-medium transition-all duration-200',
               isQuickFilterActive(filter.key)
-                ? 'bg-blue-600 text-white shadow-lg'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200',
+                ? 'bg-blue-600 text-white shadow-lg' : filter.key === 'luxury' ? 'bg-purple-600 text-white shadow-lg'
+                : filter.key === 'budget' ? 'bg-purple-600 text-white shadow-lg shadow-lg' : 'bg-gray-100 text-gray-700 hover:bg-gray-200',
               filtersLoading ? 'opacity-50 cursor-not-allowed' : ''
             ]"
           >

@@ -27,75 +27,37 @@
         <p class="text-lg text-gray-600">Handpicked accommodations for your comfort</p>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Property Card 1 -->
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-          <div class="h-48 bg-gradient-to-br from-blue-400 to-purple-500 relative">
-            <div class="absolute top-4 right-4 bg-white px-2 py-1 rounded-full text-sm font-medium text-gray-700">
-              $120/night
-            </div>
-          </div>
+      <!-- Loading State -->
+      <div v-if="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div v-for="i in 3" :key="i" class="bg-white rounded-2xl shadow-lg overflow-hidden animate-pulse">
+          <div class="h-48 bg-gray-200"></div>
           <div class="p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Luxury Beach Resort</h3>
-            <p class="text-gray-600 mb-4">📍 Malibu, California</p>
-            <div class="flex items-center justify-between">
-              <div class="flex items-center space-x-2">
-                <span class="text-yellow-400">★★★★★</span>
-                <span class="text-gray-600">(4.9)</span>
-              </div>
-              <div class="flex items-center space-x-2">
-                <span class="text-gray-500">🛏️ 2 beds</span>
-                <span class="text-gray-500">🛁 1 bath</span>
-              </div>
-            </div>
+            <div class="h-4 bg-gray-200 rounded mb-2"></div>
+            <div class="h-3 bg-gray-200 rounded mb-4"></div>
+            <div class="h-3 bg-gray-200 rounded w-2/3"></div>
           </div>
         </div>
-
-        <!-- Property Card 2 -->
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-          <div class="h-48 bg-gradient-to-br from-green-400 to-blue-500 relative">
-            <div class="absolute top-4 right-4 bg-white px-2 py-1 rounded-full text-sm font-medium text-gray-700">
-              $85/night
-            </div>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Cozy Mountain Cabin</h3>
-            <p class="text-gray-600 mb-4">📍 Aspen, Colorado</p>
-            <div class="flex items-center justify-between">
-              <div class="flex items-center space-x-2">
-                <span class="text-yellow-400">★★★★☆</span>
-                <span class="text-gray-600">(4.7)</span>
-              </div>
-              <div class="flex items-center space-x-2">
-                <span class="text-gray-500">🛏️ 3 beds</span>
-                <span class="text-gray-500">🛁 2 baths</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Property Card 3 -->
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-          <div class="h-48 bg-gradient-to-br from-pink-400 to-red-500 relative">
-            <div class="absolute top-4 right-4 bg-white px-2 py-1 rounded-full text-sm font-medium text-gray-700">
-              $200/night
-            </div>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Urban Loft Apartment</h3>
-            <p class="text-gray-600 mb-4">📍 Manhattan, NYC</p>
-            <div class="flex items-center justify-between">
-              <div class="flex items-center space-x-2">
-                <span class="text-yellow-400">★★★★★</span>
-                <span class="text-gray-600">(4.8)</span>
-              </div>
-              <div class="flex items-center space-x-2">
-                <span class="text-gray-500">🛏️ 1 bed</span>
-                <span class="text-gray-500">🛁 1 bath</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      </div>
+      
+      <!-- Featured Properties Grid -->
+      <div v-else-if="featuredProperties.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <PropertyCard 
+          v-for="property in featuredProperties" 
+          :key="property.id" 
+          :property="property"
+          :showPopular="true"
+          class="transform hover:scale-105 transition-all duration-300"
+        />
+      </div>
+      
+      <!-- Empty State -->
+      <div v-else class="text-center py-12">
+        <div class="text-6xl mb-4">🏠</div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-2">No featured properties available</h3>
+        <p class="text-gray-600 mb-6">Check back later for new featured listings!</p>
+        <NuxtLink to="/properties" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors inline-block">
+          Browse All Properties
+        </NuxtLink>
       </div>
     </div>
 
@@ -145,9 +107,48 @@
 
 <script setup>
 const router = useRouter()
+const client = useSupabaseClient()
+
+// State
+const featuredProperties = ref([])
+const loading = ref(true)
+
+// Fetch featured properties (popular/recently added)
+const fetchFeaturedProperties = async () => {
+  loading.value = true
+  try {
+    const { data, error } = await client
+      .from('properties')
+      .select(`
+        *,
+        owner:users!properties_owner_id_fkey(
+          id,
+          first_name,
+          last_name,
+          email
+        )
+      `)
+      .eq('is_available', true)
+      .order('created_at', { ascending: false })
+      .limit(6)
+    
+    if (error) throw error
+    featuredProperties.value = data || []
+    console.log('Featured properties fetched:', featuredProperties.value.length)
+  } catch (error) {
+    console.error('Error fetching featured properties:', error)
+    featuredProperties.value = []
+  } finally {
+    loading.value = false
+  }
+}
+
 function goToProperties(){
   router.push('/properties')
-
 }
-// Home page component
+
+// Fetch featured properties on mount
+onMounted(() => {
+  fetchFeaturedProperties()
+})
 </script> 

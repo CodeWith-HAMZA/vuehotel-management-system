@@ -15,6 +15,8 @@ export default defineEventHandler(async (event) => {
     });
 
     return { success: true, response };
+
+    
   } catch (err) {
     return { success: false, error: err.message };
   }
