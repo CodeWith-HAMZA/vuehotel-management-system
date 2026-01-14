@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <div class="bg-white rounded-2xl shadow-lg p-6">
+      <!-- <div class="bg-white rounded-2xl shadow-lg p-6">
         <div class="flex items-center">
           <div class="p-2 bg-yellow-100 rounded-lg">
             <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -43,9 +43,9 @@
             <p class="text-2xl font-bold text-gray-900">{{ stats.averageRating }}/5</p>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <div class="bg-white rounded-2xl shadow-lg p-6">
+      <!-- <div class="bg-white rounded-2xl shadow-lg p-6">
         <div class="flex items-center">
           <div class="p-2 bg-purple-100 rounded-lg">
             <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -57,7 +57,7 @@
             <p class="text-2xl font-bold text-gray-900">{{ stats.favoriteProperties }}</p>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <!-- Main Dashboard Sections -->
@@ -155,14 +155,14 @@
               </div>
             </NuxtLink>
             
-            <NuxtLink to="/favorites" class="w-full text-left p-3 rounded-lg hover:bg-gray-50 transition-colors">
+            <!-- <NuxtLink to="/favorites" class="w-full text-left p-3 rounded-lg hover:bg-gray-50 transition-colors">
               <div class="flex items-center space-x-3">
                 <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                 </svg>
                 <span class="text-gray-700">View Favorites</span>
               </div>
-            </NuxtLink>
+            </NuxtLink> -->
             
             <NuxtLink to="/bookings" class="w-full text-left p-3 rounded-lg hover:bg-gray-50 transition-colors">
               <div class="flex items-center space-x-3">
@@ -173,7 +173,7 @@
               </div>
             </NuxtLink>
             
-            <button class="w-full text-left p-3 rounded-lg hover:bg-gray-50 transition-colors">
+            <button @click="showHelpModal = true" class="w-full text-left p-3 rounded-lg hover:bg-gray-50 transition-colors">
               <div class="flex items-center space-x-3">
                 <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -196,6 +196,97 @@
               <p class="text-sm text-gray-700">{{ notification.message }}</p>
               <p class="text-xs text-gray-500 mt-1">{{ notification.time }}</p>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div v-if="showHelpModal" class="fixed inset-0 z-50 overflow-y-auto" @click.self="showHelpModal = false">
+      <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+        <!-- Background overlay -->
+        <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" @click="showHelpModal = false"></div>
+
+        <!-- Modal panel -->
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-2xl font-bold text-gray-900">Need Help?</h3>
+              <button @click="showHelpModal = false" class="text-gray-400 hover:text-gray-500">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Content -->
+            <div class="space-y-4">
+              <div>
+                <h4 class="text-lg font-semibold text-gray-900 mb-2">We're here to help!</h4>
+                <p class="text-gray-600 mb-4">
+                  If you have any questions, concerns, or need assistance with your bookings, our support team is ready to help you.
+                </p>
+              </div>
+
+              <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-blue-600 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                  <div>
+                    <p class="text-sm font-medium text-blue-900 mb-1">Contact Support</p>
+                    <a href="mailto:zohaibahmed@gmail.com" class="text-blue-600 hover:text-blue-700 font-semibold text-lg break-all">
+                      zohaibahmed@gmail.com
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-3">
+                <h5 class="font-semibold text-gray-900">Common Questions:</h5>
+                <div class="space-y-2 text-sm text-gray-600">
+                  <div class="flex items-start space-x-2">
+                    <span class="text-blue-600 mt-1">•</span>
+                    <span>How do I modify or cancel my booking?</span>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <span class="text-blue-600 mt-1">•</span>
+                    <span>What is the cancellation policy?</span>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <span class="text-blue-600 mt-1">•</span>
+                    <span>How do I contact the property owner?</span>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <span class="text-blue-600 mt-1">•</span>
+                    <span>What payment methods are accepted?</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-gray-50 rounded-lg p-4">
+                <p class="text-sm text-gray-600">
+                  <strong>Response Time:</strong> Our support team typically responds within 24 hours during business days.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <button 
+              @click="showHelpModal = false" 
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Close
+            </button>
+            <a 
+              href="mailto:zohaibahmed@gmail.com"
+              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Send Email
+            </a>
           </div>
         </div>
       </div>
@@ -228,6 +319,7 @@ const stats = ref({
 const recentBookings = ref([])
 const upcomingTrips = ref([])
 const notifications = ref([])
+const showHelpModal = ref(false)
 
 // Fetch guest dashboard data
 const fetchGuestData = async () => {

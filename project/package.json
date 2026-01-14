@@ -17,6 +17,7 @@
     "@stripe/stripe-js": "^7.9.0",
     "@supabase/supabase-js": "^2.54.0",
     "@vueuse/nuxt": "^13.6.0",
+    "jspdf": "^4.0.0",
     "nuxt": "^4.0.3",
     "resend": "^6.4.2",
     "stripe": "^18.5.0",

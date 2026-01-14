@@ -265,6 +265,17 @@
                 >
                   Contact Host
                 </button>
+
+                <button 
+                  v-if="booking.status === 'confirmed'"
+                  @click="downloadPDF"
+                  class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  </svg>
+                  <span>Download Booking Report</span>
+                </button>
               </div>
               </div>
 
@@ -283,10 +294,101 @@
               <p class="text-sm text-gray-600 mb-3">
                 Questions about your booking? We're here to help!
               </p>
-              <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded-lg font-medium transition-colors">
+              <button @click="showHelpModal = true" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded-lg font-medium transition-colors">
                 Contact Support
               </button>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div v-if="showHelpModal" class="fixed inset-0 z-50 overflow-y-auto" @click.self="showHelpModal = false">
+      <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+        <!-- Background overlay -->
+        <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" @click="showHelpModal = false"></div>
+
+        <!-- Modal panel -->
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-2xl font-bold text-gray-900">Need Help?</h3>
+              <button @click="showHelpModal = false" class="text-gray-400 hover:text-gray-500">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Content -->
+            <div class="space-y-4">
+              <div>
+                <h4 class="text-lg font-semibold text-gray-900 mb-2">We're here to help!</h4>
+                <p class="text-gray-600 mb-4">
+                  If you have any questions, concerns, or need assistance with your bookings, our support team is ready to help you.
+                </p>
+              </div>
+
+              <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-blue-600 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                  <div>
+                    <p class="text-sm font-medium text-blue-900 mb-1">Contact Support</p>
+                    <a href="mailto:zohaibahmed@gmail.com" class="text-blue-600 hover:text-blue-700 font-semibold text-lg break-all">
+                      zohaibahmed@gmail.com
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-3">
+                <h5 class="font-semibold text-gray-900">Common Questions:</h5>
+                <div class="space-y-2 text-sm text-gray-600">
+                  <div class="flex items-start space-x-2">
+                    <span class="text-blue-600 mt-1">•</span>
+                    <span>How do I modify or cancel my booking?</span>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <span class="text-blue-600 mt-1">•</span>
+                    <span>What is the cancellation policy?</span>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <span class="text-blue-600 mt-1">•</span>
+                    <span>How do I contact the property owner?</span>
+                  </div>
+                  <div class="flex items-start space-x-2">
+                    <span class="text-blue-600 mt-1">•</span>
+                    <span>What payment methods are accepted?</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-gray-50 rounded-lg p-4">
+                <p class="text-sm text-gray-600">
+                  <strong>Response Time:</strong> Our support team typically responds within 24 hours during business days.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <button 
+              @click="showHelpModal = false" 
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Close
+            </button>
+            <a 
+              href="mailto:zohaibahmed@gmail.com"
+              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Send Email
+            </a>
           </div>
         </div>
       </div>
@@ -303,6 +405,7 @@ const booking = ref(null)
 const userProfile = ref(null)
 const loading = ref(true)
 const error = ref(null)
+const showHelpModal = ref(false)
 
 // Computed
 const calculateNights = (checkIn, checkOut) => {
@@ -433,6 +536,158 @@ const modifyBooking = () => {
 const contactHost = () => {
   // Implement host contact functionality
   alert('Contact host functionality coming soon!')
+}
+
+const downloadPDF = async () => {
+  if (!booking.value) return
+  
+  try {
+    // Dynamically import jsPDF
+    const { jsPDF } = await import('jspdf')
+    
+    const doc = new jsPDF()
+    const pageWidth = doc.internal.pageSize.getWidth()
+    const pageHeight = doc.internal.pageSize.getHeight()
+    let yPosition = 20
+    
+    // Helper function to add text with wrapping
+    const addText = (text, x, y, options = {}) => {
+      const { fontSize = 10, fontStyle = 'normal', color = [0, 0, 0], align = 'left' } = options
+      doc.setFontSize(fontSize)
+      doc.setFont('helvetica', fontStyle)
+      doc.setTextColor(color[0], color[1], color[2])
+      
+      const maxWidth = pageWidth - x - 20
+      const lines = doc.splitTextToSize(text, maxWidth)
+      doc.text(lines, x, y, { align })
+      return y + (lines.length * fontSize * 0.4) + 5
+    }
+    
+    // Header
+    doc.setFillColor(59, 130, 246) // Blue color
+    doc.rect(0, 0, pageWidth, 40, 'F')
+    
+    addText('Explore & Go', 20, 25, { fontSize: 24, fontStyle: 'bold', color: [255, 255, 255] })
+    addText('Booking Confirmation Report', 20, 35, { fontSize: 12, color: [255, 255, 255] })
+    
+    yPosition = 50
+    
+    // Booking ID and Status
+    addText(`Booking ID: ${booking.value.id}`, 20, yPosition, { fontSize: 10, fontStyle: 'bold' })
+    yPosition += 10
+    addText(`Status: ${formatStatus(booking.value.status)}`, 20, yPosition, { fontSize: 10, fontStyle: 'bold', color: [34, 197, 94] })
+    yPosition += 15
+    
+    // Property Information Section
+    doc.setDrawColor(200, 200, 200)
+    doc.line(20, yPosition, pageWidth - 20, yPosition)
+    yPosition += 10
+    
+    addText('PROPERTY INFORMATION', 20, yPosition, { fontSize: 14, fontStyle: 'bold' })
+    yPosition += 10
+    addText(booking.value.propertyName, 20, yPosition, { fontSize: 12, fontStyle: 'bold' })
+    yPosition += 8
+    addText(`Location: ${formatLocation(booking.value.property.city, booking.value.property.state, booking.value.property.country)}`, 20, yPosition, { fontSize: 10 })
+    yPosition += 8
+    addText(`Rating: 4.9/5 (128 reviews)`, 20, yPosition, { fontSize: 10 })
+    yPosition += 15
+    
+    // Stay Information Section
+    doc.line(20, yPosition, pageWidth - 20, yPosition)
+    yPosition += 10
+    
+    addText('STAY INFORMATION', 20, yPosition, { fontSize: 14, fontStyle: 'bold' })
+    yPosition += 10
+    addText(`Check-in: ${formatDate(booking.value.checkIn)}`, 20, yPosition, { fontSize: 10 })
+    yPosition += 8
+    addText(`Check-out: ${formatDate(booking.value.checkOut)}`, 20, yPosition, { fontSize: 10 })
+    yPosition += 8
+    addText(`Total Nights: ${calculateNights(booking.value.checkIn, booking.value.checkOut)}`, 20, yPosition, { fontSize: 10 })
+    yPosition += 8
+    addText(`Guests: ${booking.value.guests} guest(s)`, 20, yPosition, { fontSize: 10 })
+    yPosition += 15
+    
+    // Guest Information Section
+    if (userProfile.value) {
+      doc.line(20, yPosition, pageWidth - 20, yPosition)
+      yPosition += 10
+      
+      addText('GUEST INFORMATION', 20, yPosition, { fontSize: 14, fontStyle: 'bold' })
+      yPosition += 10
+      addText(`Name: ${userProfile.value.first_name} ${userProfile.value.last_name}`, 20, yPosition, { fontSize: 10 })
+      yPosition += 8
+      addText(`Email: ${userProfile.value.email}`, 20, yPosition, { fontSize: 10 })
+      yPosition += 8
+      addText(`Phone: ${userProfile.value.phone || 'Not provided'}`, 20, yPosition, { fontSize: 10 })
+      yPosition += 15
+    }
+    
+    // Price Breakdown Section
+    doc.line(20, yPosition, pageWidth - 20, yPosition)
+    yPosition += 10
+    
+    addText('PRICE BREAKDOWN', 20, yPosition, { fontSize: 14, fontStyle: 'bold' })
+    yPosition += 10
+    
+    const subtotal = calculateSubtotal()
+    const serviceFee = calculateServiceFee()
+    const taxes = calculateTaxes()
+    
+    addText(`Room Rate: $${booking.value.property.price_per_night} × ${calculateNights(booking.value.checkIn, booking.value.checkOut)} nights`, 20, yPosition, { fontSize: 10 })
+    yPosition += 8
+    addText(`Subtotal: $${subtotal.toFixed(2)}`, 20, yPosition, { fontSize: 10 })
+    yPosition += 8
+    addText(`Service Fee: $${serviceFee.toFixed(2)}`, 20, yPosition, { fontSize: 10 })
+    yPosition += 8
+    addText(`Taxes: $${taxes.toFixed(2)}`, 20, yPosition, { fontSize: 10 })
+    yPosition += 10
+    
+    doc.line(20, yPosition, pageWidth - 20, yPosition)
+    yPosition += 10
+    
+    addText(`TOTAL: $${booking.value.total}`, 20, yPosition, { fontSize: 14, fontStyle: 'bold' })
+    yPosition += 15
+    
+    // Booking Details Section
+    doc.line(20, yPosition, pageWidth - 20, yPosition)
+    yPosition += 10
+    
+    addText('BOOKING DETAILS', 20, yPosition, { fontSize: 14, fontStyle: 'bold' })
+    yPosition += 10
+    addText(`Booked on: ${formatDate(booking.value.created_at)}`, 20, yPosition, { fontSize: 10 })
+    yPosition += 8
+    addText(`Last updated: ${formatDate(booking.value.updated_at)}`, 20, yPosition, { fontSize: 10 })
+    yPosition += 15
+    
+    // Cancellation Policy
+    if (yPosition > pageHeight - 40) {
+      doc.addPage()
+      yPosition = 20
+    }
+    
+    doc.line(20, yPosition, pageWidth - 20, yPosition)
+    yPosition += 10
+    
+    addText('CANCELLATION POLICY', 20, yPosition, { fontSize: 14, fontStyle: 'bold' })
+    yPosition += 10
+    addText('Free cancellation up to 24 hours before check-in. No refunds for cancellations made within 24 hours of arrival.', 20, yPosition, { fontSize: 10 })
+    yPosition += 15
+    
+    // Footer
+    const footerY = pageHeight - 20
+    doc.setDrawColor(200, 200, 200)
+    doc.line(20, footerY - 10, pageWidth - 20, footerY - 10)
+    addText('Thank you for choosing Explore & Go!', pageWidth / 2, footerY, { fontSize: 10, align: 'center', color: [100, 100, 100] })
+    addText('For support, contact: zohaibahmed@gmail.com', pageWidth / 2, footerY + 5, { fontSize: 8, align: 'center', color: [150, 150, 150] })
+    
+    // Save the PDF
+    const fileName = `Booking-${booking.value.id.slice(0, 8)}-${new Date().toISOString().split('T')[0]}.pdf`
+    doc.save(fileName)
+    
+  } catch (error) {
+    console.error('Error generating PDF:', error)
+    alert('Failed to generate PDF. Please make sure jsPDF is installed: npm install jspdf')
+  }
 }
 
 // Fetch booking data
